@@ -79,7 +79,7 @@ const Home = ({setUser, user}) => {
               </Grid>
               <Grid item xs={4}>
                 <Stack spacing={2}>
-                  <Card sx={{ maxWidth: 345 }} className="gradient2">
+                  <Card sx={{ maxWidth: 345 , }} className="gradient2">
                     <Stack spacing={2} direction={`row`}>
                       <div className="iconstyle">
                         <StorefrontIcon className="iconstyle" />

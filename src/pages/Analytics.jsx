@@ -5,7 +5,8 @@ import Navbar from "../components/Navbar";
 import { GeoChart } from "../Barchat/GeoChart";
 import { CityChart } from "../Barchat/CityChart";
 import { PieChart } from "../Barchat/PieChart";
-const Analytics = () => {
+
+const Analytics = ({ setUser }) => {
   return (
     <>
       <div className="bgcolor">
@@ -88,7 +89,7 @@ const Analytics = () => {
                     <Stack spacing={2} direction="row">
                       <Card
                         sx={{ height: "19vh", minWidth: 49 + "%" }}
-                        className="gradient3"
+                        className="gradient"
                       >
                         <CardContent>
                           {/* Content for the third card */}
@@ -120,7 +121,7 @@ const Analytics = () => {
                       </Card>
                       <Card
                         sx={{ height: "19vh", minWidth: 49 + "%" }}
-                        className="gradient4"
+                        className="gradient2"
                       >
                         <CardContent>
                           {/* Content for the fourth card */}

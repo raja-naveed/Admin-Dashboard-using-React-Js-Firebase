@@ -116,7 +116,7 @@ export default function Navbar({setUser , user}) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={()=>{navigate('/settings')}}>Profile</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
@@ -196,7 +196,7 @@ export default function Navbar({setUser , user}) {
             sx={{ display: { xs: "none", sm: "block"} }}
             className="pricetitlee"
           >
-            Admin Dashboard , {user?.displayName}
+            Admin Dashboard  {user?.displayName}
           </Typography>
     
           <Box sx={{ flexGrow: 1 }} />

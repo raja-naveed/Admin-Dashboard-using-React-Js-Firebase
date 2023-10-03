@@ -2,6 +2,7 @@ import React from "react";
 import SideNav from "../components/SideNav";
 import { Box } from "@mui/material";
 import Navbar from "../components/Navbar";
+import List from "../components/settinggg/List";
 
 const Settings = ({setUser , user}) => {
   return (
@@ -13,7 +14,7 @@ const Settings = ({setUser , user}) => {
     <Box sx={{ display: "flex" }}>
       <SideNav />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <h1>Settings</h1>
+        <List />
       </Box>
     </Box>
   </>

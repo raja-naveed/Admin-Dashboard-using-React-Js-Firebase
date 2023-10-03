@@ -15,18 +15,6 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { db } from "../../firebase/firebase";
 import Modal from "@mui/material/Modal";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 import {
   collection,
   getDocs,
@@ -42,15 +30,36 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Typography } from "@mui/material";
 import AddProduct from "./AddProduct";
+import { rowAppStore } from "../../rowStore";
+import EditProduct from "./EditProduct";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 
 export default function ProductList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [rows, setRows] = useState([]);
+  const setRows = rowAppStore((state) => state.setRows);
+  const rows = rowAppStore((state) => state.rows);
   const [open, setOpen] = React.useState(false);
+  const [formid, setFormid] = useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [openEdit, setOpenEdit] = React.useState(false);
+  const handleEditOpen = () => setOpenEdit(true);
+  const handleEditClose = () => setOpenEdit(false);
   const empCollectionRef = collection(db, "products");
+
   const deleteUser = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -99,6 +108,16 @@ export default function ProductList() {
       getUsers();
     }
   };
+  const editData = (id, name, catogery, price) => {
+    const data = {
+      id,
+      name,
+      catogery,
+      price,
+    };
+    setFormid(data);
+    handleEditOpen();
+  };
 
   return (
     <>
@@ -111,6 +130,16 @@ export default function ProductList() {
         >
           <Box sx={style}>
             <AddProduct closeEvent={handleClose} />
+          </Box>
+        </Modal>
+        <Modal
+          open={openEdit}
+          onClose={handleEditClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <EditProduct closeEvent={handleEditClose} fid = {formid}/>
           </Box>
         </Modal>
       </div>
@@ -177,13 +206,12 @@ export default function ProductList() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   return (
-                    <TableRow hover role="checkbox">
-                      {" "}
+                    <TableRow hover role="checkbox" key={row.id}>
                       <TableCell key={row.id} align={"left"}>
                         {row.name}
                       </TableCell>
                       <TableCell key={row.id} align={"left"}>
-                        {row.price}
+                       $ {row.price}
                       </TableCell>
                       <TableCell key={row.id} align={"left"}>
                         {row.catogery}
@@ -200,7 +228,7 @@ export default function ProductList() {
                               cursor: "pointer",
                             }}
                             className="cursor-pointer"
-                            onClick={() => editUser(row.id)}
+                            onClick={() => editData(row.id, row.name, row.catogery, row.price)}
                           />
                           <DeleteIcon
                             style={{
