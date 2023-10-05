@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Stack } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import styled from "@mui/material/styles/styled";
+import PersonalDetails from "./PersonalDetails";
+import { auth } from "../../firebase/firebase";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,10 +80,30 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 
 export default function List() {
   const [value, setValue] = React.useState(0);
+  const [user, setUser] = React.useState(null);
+  const [personal, setPersonal] = React.useState({
+    address: "",
+    phone: "",
+    dob: "",
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const handlePersonalChange = (event) => {
+    const { name, value } = event.target;
+    setPersonal({ ...personal, [name]: value });
+  };
+
+  React.useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        setUser(authUser);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -100,10 +122,35 @@ export default function List() {
               </StyledTabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-              Item One
+              <Stack spacing={4}>
+                <TextField
+                  label="Address"
+                  name="address"
+                  value={personal.address}
+                  onChange={handlePersonalChange}
+                  fullWidth
+                />
+                <TextField
+                  label="Phone Number"
+                  name="phone"
+                  value={personal.phone}
+                  onChange={handlePersonalChange}
+                  fullWidth
+                />
+                <TextField
+                  label="Date of Birth"
+                  name="dob"
+                  value={personal.dob}
+                  onChange={handlePersonalChange}
+                  fullWidth
+                />
+                <Button variant="contained" color="primary">
+                  Update Personal Details
+                </Button>
+              </Stack>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              Item Two
+              <PersonalDetails user={user} />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
               Item Three
