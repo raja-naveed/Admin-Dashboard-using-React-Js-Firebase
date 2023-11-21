@@ -9,6 +9,7 @@ import { auth } from "./firebase/firebase";
 import { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import PageNotFound from "./pages/PageNotFound";
+import { ProductStockChart } from "./components/api";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -39,6 +40,9 @@ function App() {
         )}
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
+      // <>
+      // <ProductStockChart/>
+      // </>
   );
 }
 

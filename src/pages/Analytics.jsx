@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { GeoChart } from "../Barchat/GeoChart";
 import { CityChart } from "../Barchat/CityChart";
 import { PieChart } from "../Barchat/PieChart";
+import { ProductStockChart } from "../components/api";
 
 const Analytics = ({ setUser }) => {
   return (
@@ -177,6 +178,13 @@ const Analytics = ({ setUser }) => {
                 <Card sx={{ height: 40 + "vh" }}>
                   <CardContent>
                     <PieChart />
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={4}>
+                <Card sx={{ height: 40 + "vh" }}>
+                  <CardContent>
+                    <ProductStockChart />
                   </CardContent>
                 </Card>
               </Grid>
