@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore";
 import {getAuth} from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBXWXhps7p4ITcbadJXQUYW9FamWzm43Gg",
-    authDomain: "reacttt-74d18.firebaseapp.com",
-    projectId: "reacttt-74d18",
-    storageBucket: "reacttt-74d18.appspot.com",
-    messagingSenderId: "1034459102717",
-    appId: "1:1034459102717:web:75bb508267e1a5c4d0ed94"
+    apiKey: "AIzaSyBRROWCUWNvYMuCTGLt1o7dC0pqHMgAJ_A",
+    authDomain: "admin-project-d754a.firebaseapp.com",
+    projectId: "admin-project-d754a",
+    storageBucket: "admin-project-d754a.appspot.com",
+    messagingSenderId: "356778125801",
+    appId: "1:356778125801:web:b9307f25084efa2150c378"
 };
 
 const app = initializeApp(firebaseConfig);
